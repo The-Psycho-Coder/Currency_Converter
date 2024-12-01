@@ -17,7 +17,7 @@ for(let select of dropdowns)
     }
 
     select.addEventListener("change", (event) => {
-        updateFlag(event.updateFlag);
+        updateFlag(event.target);
     });
 }
 
@@ -44,10 +44,10 @@ bttn.addEventListener("click", async (event) => {
     let FROM = fromCurr.value.toLowerCase();
     let TO = toCurr.value.toLowerCase();
 
-    const URL = `${BASE_URL}/${FROM}/${TO}.json`
+    const URL = `${BASE_URL}/${FROM}.json`
     let response = await fetch(URL);
     let data = await response.json();
-    let rate = data[TO];
+    let rate = data[FROM][TO];
 
     let finalAmount = amountVal * rate;
     mssg.innerText = `${amountVal} ${FROM} = ${finalAmount} ${TO}`;
